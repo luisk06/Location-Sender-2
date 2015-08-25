@@ -136,7 +136,7 @@
                 <div id="map"></div>
                 <div id="wrapper">
                 <table>
-                	<tr><td width="48%">SHIPPER (FROM)</td><td width="48%">CONSIGNEE (TO)</td></tr>
+                	<tr><td>SHIPPER (FROM)</td><td>CONSIGNEE (TO)</td></tr>
                  	<tr>
                     	<td>
                         	<div  id="outputDiv"></div>
@@ -272,7 +272,7 @@
 								initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
 								
 								
-								$("#origin_text").html("- "+data[ix].or_contact+"<br />- "+data[ix].or_address_1+"<br />- "+data[ix].or_city+", "+data[ix].or_state+" <br/> item: "+data[ix].item1+"");
+								$("#origin_text").html("- "+data[ix].or_contact+"<br />- "+data[ix].or_address_1+"<br />- "+data[ix].or_city+", "+data[ix].or_state+" <br/>");
 								$("#destination_text").html("- "+data[ix].dt_contact+"<br /> - "+data[ix].dt_address_1+"<br />- "+data[ix].dt_city+", "+data[ix].dt_state+" <br/>");
 								$("#header_load").html("Load # :"+data[ix].load_number+": "+data[ix].customer+" ");
 								$("#item_origin").html(""+data[ix].item1+"");
