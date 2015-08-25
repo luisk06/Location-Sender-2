@@ -128,10 +128,10 @@
 	
    
     <div data-role="page" id="page2" data-url="map-page">        	
-        	<div data-role="header" style="height:1em">
-            	<h1> <a href="#page1_1" id="back" style="color: black;" class=""> Back</a></h1><br />
+        	<div data-role="header" style="height:1.5em">
+            	<h1> <a href="#page1_1" id="back" style="color: black; padding-top:2px" class=""> Back</a></h1><br />
             </div>
-            <h2 style="color: red;" id="header_load"></h2>
+            <h2 style="color: red; margin-top:2px; margin-bottom:2px" id="header_load"></h2>
             <div role="mappage" class="ui-content">
                 <div id="map"></div>
                 <div id="wrapper">
@@ -243,7 +243,7 @@
 		</script>
         
 		<script>
-            function load_details(ix,data){
+            function load_details(ix){
 				 //location.href("#page2");
 				 location.href = "#page2";
 				   alert($('#latitude').val());
@@ -260,8 +260,8 @@
 				initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
 				
 				
-				$("#origin_text").html("Name: "+data[ix].or_contact+"<br /> Address: "+data[ix].or_address_1+"<br /> City :"+data[ix].or_city+", ST:"+data[ix].or_state+" <br/> item: "+data[ix].item1+"");
-				$("#destination_text").html("Name: "+data[ix].dt_contact+"<br /> Address: "+data[ix].dt_address_1+"<br /> City :"+data[ix].dt_city+", ST:"+data[ix].dt_state+" <br/>");
+				$("#origin_text").html("- "+data[ix].or_contact+"<br />- "+data[ix].or_address_1+"<br />- "+data[ix].or_city+", "+data[ix].or_state+" <br/> item: "+data[ix].item1+"");
+				$("#destination_text").html("- "+data[ix].dt_contact+"<br /> - "+data[ix].dt_address_1+"<br />- "+data[ix].dt_city+", "+data[ix].dt_state+" <br/>");
 				$("#header_load").html("Load # :"+data[ix].load_number+": "+data[ix].customer+" ");
                       //return false;
                 };
@@ -348,7 +348,7 @@
 							for (var j = 0; j < 1; j++) {
 							  geocoder.geocode({'address': destinationList[j]},
 								  showGeocodedAddressOnMap(true));
-							  outputDiv.innerHTML += '<b>'+ results[j].duration.text + results[j].distance.text + '<br>' + '</b>';
+							  outputDiv.innerHTML += '<b>'+ results[j].duration.text + '<br>' + results[j].distance.text + '</b>';
 								 
 							}
 						  }
@@ -360,7 +360,7 @@
 							for (var j = 1; j < 2; j++) {
 							  geocoder.geocode({'address': destinationList[j]},
 								  showGeocodedAddressOnMap(true));
-							  outputDiv2.innerHTML += '<b>'  + results[j].duration.text + '<br>' + results[j].distance.text +'</b>' ;
+							  outputDiv2.innerHTML += '<b>'  + results[j].duration.text + '<br />' + results[j].distance.text +'</b>' ;
 							}
 						  }
 						  
