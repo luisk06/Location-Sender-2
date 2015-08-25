@@ -6,7 +6,7 @@
         id        = "com.leanlocation.staffing"
         version   = "1.0.0">
 
-    <name>Location Sender</name>
+    <name>Location Sender 2 - Local</name>
 
     <description>
        App to send location and username to server
