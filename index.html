@@ -217,7 +217,7 @@
 								alert(data[0].idts_load);//-96.8141;//data[0].dp_long;
 								$("#lol_item").html("");
 									for(i=0;i<data.length;i++){
-											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+i+','+data+')">LOAD # :'+data[i].load_number+' : '+data[i].customer+'</a><br />');
+											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+i+')">LOAD # :'+data[i].load_number+' : '+data[i].customer+'</a><br />');
 										}
 										location.href = "#page1_1";
 										setInterval(function(){ 
