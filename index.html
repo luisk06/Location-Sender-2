@@ -53,6 +53,7 @@
     function onDeviceReady() {
 	
 		 navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		 window.plugins.insomnia.keepAwake();
       
     }
 
