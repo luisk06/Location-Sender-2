@@ -138,23 +138,11 @@
 					if ( e.regid.length > 0 )
 					{
 						$("#app-status-ul").append('<li>REGISTERING -> REGID: \n\n' + '<div id="reg_id">' + e.regid +'</div>'+ "\n\n</li>");
+						$("#reg_id").html(e.regid);
+						
 						// Your GCM push server needs to know the regID before it can push to this device
 						// here is where you might want to send it the regID for later use.
 						console.log("regID = " + e.regid);
-						//--------------
-						var reg = e.regid;
-                        $.ajax({
-                            type: 'POST',
-                            data: {reg_id: reg},
-                            url: 'http://leanstaffing.com/testpush/saveid.php',
-                            success: function(data){
-                                console.log(data);
-                            },
-                            error: function(){
-                                console.log(data);
-                            }})			
-						
-						//--------------------
 					}
                     break;
                     
@@ -177,41 +165,41 @@
 						else
 						{	// otherwise we were launched because the user touched a notification in the notification tray.
 							if (e.coldstart){
-								$("#app-status-ul").append('<li>--RECEIVED NOTIFICATIONS--' + '</li>');
+								//$("#app-status-ul").append('<li>--RECEIVED NOTIFICATIONS--' + '</li>');
 							}else{
-							$("#app-status-ul").append('<li>--BACKGROUND NOTIFICATIONS--' + '</li>');
+							   //$("#app-status-ul").append('<li>--BACKGROUND NOTIFICATIONS--' + '</li>');
 							}
 						}
 							
-						$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+						//$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
                         //android only
-						$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+						//$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
                         //amazon-fireos only
-                        $("#app-status-ul").append('<li>MESSAGE -> TIMESTAMP: ' + e.payload.timeStamp + '</li>');
+                        //$("#app-status-ul").append('<li>MESSAGE -> TIMESTAMP: ' + e.payload.timeStamp + '</li>');
                     break;
                     
                     case 'error':
-						$("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+						//$("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
                     break;
                     
                     default:
-						$("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+						//$("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
                     break;
                 }
             }
             
             function tokenHandler (result) {
-                $("#app-status-ul").append('<li>token: '+ result +'</li>');
+                //$("#app-status-ul").append('<li>token: '+ result +'</li>');
                 // Your iOS push server needs to know the token before it can push to this device
                 // here is where you might want to send it the token for later use.
             }
 			
             function successHandler (result) {
-                $("#app-status-ul").append('<li>success:'+ result +'</li>');
+                //$("#app-status-ul").append('<li>success:'+ result +'</li>');
             }
             
             function errorHandler (error) {
-                $("#app-status-ul").append('<li>error:'+ error +'</li>');
+                //$("#app-status-ul").append('<li>error:'+ error +'</li>');
             }
             
 				////////
@@ -219,13 +207,6 @@
 				////////
 				////////
 				////////
-				////////
-				////////
-			         
-
-	
-	
-
     </script>
  
   </head>
@@ -267,7 +248,8 @@
 				<div role="listpage" class="ui-content" id="lol">
 					<h2><p id="lol_item"></p></h2>
 				 </div>
-	        <!--	<div><a href="#" id="send_data2" name="send_data2">SEND LOCATION</a></div> -->
+             <!-- register id for push notifications -->
+               <div id="reg_id" hidden></div>
     </div>
 	
 	
@@ -370,6 +352,22 @@
 									for(i=0;i<data.length;i++){
 											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+data[i].idts_load+')">LOAD # :'+data[i].load_number+' : '+data[i].customer+'</a><br />');
 										}
+										
+							//-------------- SEND REGISTER ID TO DATABASE --- ANDROID CLOUD MESSAGING --- PUSH
+								var reg = $('#reg_id').html();
+								alert(reg);
+								$.ajax({
+									type: 'POST',
+									data: {reg_id: reg},
+									url: 'http://leanstaffing.com/testpush/saveid2.php',
+									success: function(data){
+										console.log(data);
+									},
+									error: function(){
+										console.log(data);
+									}})			
+								
+								//--------------------
 										location.href = "#page1_1";
 
 										setInterval(function(){ 
