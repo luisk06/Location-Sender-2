@@ -337,6 +337,7 @@
 		//---------------------------Query DATA From SERVER  -------------------
 		
 			$('#send_data1').click(function(){
+				window.plugins.insomnia.keepAwake();
 				var id_driver = $('#user_name').val();
 				//alert('test');
 							 $.ajax({
