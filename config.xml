@@ -64,7 +64,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-	<gap:plugin name="com.red_folder.phonegap.plugin.backgroundservice" version="2.0.0" />
+	<gap:plugin name="com.red_folder.phonegap.plugin.backgroundservice"/>
 	<gap:plugin name="nl.x-services.plugins.insomnia" />
 	<gap:plugin name="com.phonegap.plugins.pushplugin"/>
 
