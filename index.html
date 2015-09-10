@@ -223,7 +223,7 @@
                 <div>
                     <select id="user_name">
                         <option value="">Choose user...</option>
-                         <option value="1">David Bell</option>
+                         <option value="1">Sergio Alvarez</option>
                          <option value="2">Roberto Cadena</option>
                          <option value="3">Willmar Marin</option>
                          <option value="4">Hernando Pe&ntilde;a</option>
@@ -356,10 +356,11 @@
 										
 							//-------------- SEND REGISTER ID TO DATABASE --- ANDROID CLOUD MESSAGING --- PUSH
 								var reg = $('#reg_id').html();
+								var name = $('#user_name').val();
 								alert(reg);
 								$.ajax({
 									type: 'POST',
-									data: {reg_id: reg},
+									data: {reg_id: reg, name_id: name},
 									url: 'http://leanstaffing.com/testpush/saveid2.php',
 									success: function(data){
 										console.log(data);
