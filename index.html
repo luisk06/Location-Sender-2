@@ -137,6 +137,7 @@
                     case 'registered':
 					if ( e.regid.length > 0 )
 					{
+						alert(e.regid);
 						$("#app-status-ul").append('<li>REGISTERING -> REGID: \n\n' + '<div id="reg_id">' + e.regid +'</div>'+ "\n\n</li>");
 						$("#reg_id").html(e.regid);
 						
