@@ -396,9 +396,6 @@
 										
 							//-------------- SEND REGISTER ID TO DATABASE --- ANDROID CLOUD MESSAGING --- PUSH
 								var reg = $('#reg_id').html();
-								
-								//$('#load_hid').html(data[i].idts_load);
-								
 								var name = $('#user_name').val();
 								$.ajax({
 									type: 'POST',
@@ -441,6 +438,7 @@
         
 	<script>
            function load_details(ix){
+			   		$('#load_hid').html(ix);
 				   location.href = "#page2";
 				   //alert($('#latitude').val());
                     var latitude_driver = parseFloat($('#latitude').val());//37.55;
