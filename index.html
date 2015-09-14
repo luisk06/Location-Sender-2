@@ -111,11 +111,6 @@
               'message: ' + error.message + '\n');
     }
 	
-	
-	
-	
-	
-
 //------------------------------- handle GCM notifications for Android -------------------------------------------
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
@@ -225,10 +220,10 @@
                     <select id="user_name">
                         <option value="">Choose user...</option>
                          <option value="1">Sergio Alvarez</option>
-                         <option value="2">Roberto Cadena</option>
-                         <option value="3">Willmar Marin</option>
+                         <option value="2">Jhon Smith</option>
+<!--                         <option value="3">Willmar Marin</option>
                          <option value="4">Hernando Pe&ntilde;a</option>
-                         <option value="5">Luis Morillo</option>
+                         <option value="5">Luis Morillo</option>-->
                     </select>
                 </div>
                 <br />
@@ -252,11 +247,7 @@
              <!-- register id for push notifications -->
                <div id="reg_id" hidden></div>
     </div>
-	
-	
-	
-	
-   
+    
         <div data-role="page" id="page2" data-url="map-page">        	
         	<div data-role="header" style="height:1.5em">
             	<h1 style="padding-top:4px"> <a href="#page1_1" id="back" class="btn-class4"> Back</a></h1><br />
@@ -291,6 +282,9 @@
                         	<div><a href="#page3" id="b" name="b" class="btn-class3">GET SIGNATURE</a></div>
                         </td>
                      </tr>
+                     <tr>
+                     	<td colspan="2" valign="bottom"><div><a href="#page3" id="send_message" name="b" class="btn-class3">SEND A MESSAGE</a></div><td>
+                     </tr>
                 </table>    
                 </div>
              </div>
@@ -309,18 +303,39 @@
 				<a href="#" id="" class="btn-class2">SAVE SIGNATURE</a>
 			</div>
     </div>
+    
+    <div data-role="page" id="page4">
+  	<div data-role="header">
+    	<h1> <a href="#page1_1" id="back4" class="btn-class4"> Back</a></h1>
+    </div>
+  	<div class="inputstyle">
+  		<div role="main" class="ui-content">
+        	<p id="geolocation">Default Messages</p>
+                <div>
+                    <select id="troubles_">
+                        <option value="">Choose option...</option>
+                         <option value="1">Traffic Jam</option>
+                         <option value="2">Flat Tire</option>
+                    </select>
+                </div>
+                <br />
+            	<!--<div><input type="button" value="SEND LOCATION" id="send_data" name="send_data" style="width:50%" /></div> -->
+            	<div><a href="#" id="send_message" name="send_message" class="btn-class2">SEND MESSAGE</a></div>
+     	</div>
+     </div>
+   </div>
 	
 	<!---------------------------------- SCRIPTS ----------------- --------->
 		<script>
-		
+		var loc_mark = 0;
 		//-------------- Send Location to DATABASE ------------------------
-		function send_to_db(x,y){ 
+		function send_to_db(x,y,loc_mark){ 
                     var lati = x;//$('#latitude').val();
                     var longi = y;// $('#longitude').val();
-			var name = $('#user_name').val();
+					var name = $('#user_name').val();
                         $.ajax({
                             type: 'POST',
-                            data: {user_lat: lati, user_long: longi, user_name: name},
+                            data: {user_lat: lati, user_long: longi, user_name: name, loc_mark : loc_mark},
                             url: 'http://leanstaffing.com/testserver/save.php',
                             success: function(data){
                                 console.log(data);
@@ -344,7 +359,7 @@
 							 $.ajax({
 							 type: 'POST',
 							 dataType: 'json',
-							 url: 'http://lean-staffing.com/test_trackngo/load/app_get_load_by_driver/'+id_driver,
+							 url: 'http://lean-staffing.com/trackngo/load/app_get_load_by_driver/'+id_driver,
 							
 	                            success: function(data){
 	                                console.log(data);
@@ -372,13 +387,14 @@
 								
 								//--------------------
 										location.href = "#page1_1";
-
+										
 										setInterval(function(){ 
 											 	navigator.geolocation.getCurrentPosition(onSuccess, onError);
 											 	  function onSuccess(position) {
 												  	 var x = position.coords.latitude;
 												     var y = position.coords.longitude;
-												     send_to_db(x,y);
+													 var loc_mark = loc_mark + 1;
+												     send_to_db(x,y,loc_mark);
 											 	  }
 											 	   function onError(error) {
 												     /*   alert('code: '    + error.code    + '\n' +
@@ -406,7 +422,7 @@
                         $.ajax({
                             type: 'POST',
 			    			dataType: 'json',
-                            url: 'http://lean-staffing.com/test_trackngo/load/app_get_load_view/'+ix,
+                            url: 'http://lean-staffing.com/trackngo/load/app_get_load_view/'+ix,
 							beforeSend: function(){
 								
 								},
@@ -530,24 +546,25 @@
 							  geocoder.geocode({'address': originList[i]},
 								  showGeocodedAddressOnMap(false));
 							for (var j = 1; j < 2; j++) {
-							  geocoder.geocode({'address': destinationList[j]},
-								  showGeocodedAddressOnMap(true));
+							  geocoder.geocode({'address': destinationList[j]}, showGeocodedAddressOnMap(true));
 							  outputDiv2.innerHTML += '&nbsp;'  + results[j].duration.text + '<br>&nbsp;' + results[j].distance.text +'' ;
 							}
 						  }
-						  
-						  
-						
+		
 						}
 					  });
 					}
 					
+					 // ------- DELETE MARKERS FOR NEW MARKERS -------- //
+					 
 					function deleteMarkers(markersArray) {
 					  for (var i = 0; i < markersArray.length; i++) {
 						markersArray[i].setMap(null);
 					  }
 					  markersArray = [];
 					}
+					
+					// ------- END OF DELETE MARKERS
 
     	</script>
     <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap1" async defer></script>
