@@ -283,7 +283,11 @@
                         </td>
                      </tr>
                      <tr>
-                     	<td colspan="2" valign="bottom"><div><a href="#page4" id="send_message" name="b" class="btn-class3">SEND A MESSAGE</a></div><td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                     </tr>
+                     <tr>
+                     	<td colspan="2" valign="bottom"><div><a href="#page4" id="send_message" name="b" class="btn-class3">SEND MESSAGE TO MANAGER</a></div><td>
                      </tr>
                 </table>    
                 </div>
@@ -367,7 +371,7 @@
 								//alert(data[0].idts_load);//-96.8141;//data[0].dp_long;
 								$("#lol_item").html("");
 									for(i=0;i<data.length;i++){
-											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+data[i].idts_load+')">LOAD # :'+data[i].load_number+' : '+data[i].customer+'</a><br />');
+											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+data[i].idts_load+')">LOAD # :'+data[i].load_number+' : '+data[i].customer_name+'</a><br />');
 										}
 										
 							//-------------- SEND REGISTER ID TO DATABASE --- ANDROID CLOUD MESSAGING --- PUSH
