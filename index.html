@@ -310,7 +310,7 @@
     
     <div data-role="page" id="page4">
   	<div data-role="header">
-    	<h1> <a href="#page1_1" id="back4" class="btn-class4"> Back</a></h1>
+    	<h1> <a href="#page2" id="back4" class="btn-class4"> Back</a></h1>
     </div>
   	<div class="inputstyle">
   		<div role="main" class="ui-content">
@@ -337,7 +337,7 @@
 			
 			 $.ajax({
                             type: 'POST',
-                            data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').html(), user_id : $('#user_name').html()},
+                            data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').val(), user_id : $('#user_name').val()},
                             url: 'http://leanstaffing.com/testserver/sendmessage.php',
                             success: function(data){
                                 console.log(data);
@@ -351,7 +351,7 @@
 		
 		
 		
-		var loc_mark = 0;
+		//var loc_mark = 0;
 		//-------------- Send Location to DATABASE ------------------------
 		//function send_to_db(x,y,loc_mark){ 
 		function send_to_db(x,y){ 
@@ -379,7 +379,7 @@
 		//---------------------------Query DATA From SERVER  -------------------
 		
 			$('#send_data1').click(function(){
-				window.plugins.insomnia.keepAwake();
+				//window.plugins.insomnia.keepAwake();
 				var id_driver = $('#user_name').val();
 				//alert('test');
 							 $.ajax({
