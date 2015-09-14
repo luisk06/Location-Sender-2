@@ -353,13 +353,15 @@
 		
 		var loc_mark = 0;
 		//-------------- Send Location to DATABASE ------------------------
-		function send_to_db(x,y,loc_mark){ 
+		//function send_to_db(x,y,loc_mark){ 
+		function send_to_db(x,y){ 
                     var lati = x;//$('#latitude').val();
                     var longi = y;// $('#longitude').val();
 					var name = $('#user_name').val();
                         $.ajax({
                             type: 'POST',
-                            data: {user_lat: lati, user_long: longi, user_name: name, loc_mark : loc_mark},
+                            //data: {user_lat: lati, user_long: longi, user_name: name, loc_mark : loc_mark},
+							data: {user_lat: lati, user_long: longi, user_name: name},
                             url: 'http://leanstaffing.com/testserver/save.php',
                             success: function(data){
                                 console.log(data);
@@ -387,8 +389,6 @@
 							
 	                            success: function(data){
 	                                console.log(data);
-								//alert(data[0].dp_long);
-								//alert(data[0].idts_load);//-96.8141;//data[0].dp_long;
 								$("#lol_item").html("");
 									for(i=0;i<data.length;i++){
 											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+data[i].idts_load+')">LOAD # :'+data[i].load_number+' : '+data[i].customer_name+'</a><br />');
@@ -400,7 +400,6 @@
 								$('#load_hid').html(data[i].idts_load);
 								
 								var name = $('#user_name').val();
-								alert(reg);
 								$.ajax({
 									type: 'POST',
 									data: {reg_id: reg, name_id: name},
@@ -420,8 +419,9 @@
 											 	  function onSuccess(position) {
 												  	 var x = position.coords.latitude;
 												     var y = position.coords.longitude;
-													 var loc_mark = loc_mark + 1;
-												     send_to_db(x,y,loc_mark);
+													 //var loc_mark = loc_mark + 1;
+												     //send_to_db(x,y,loc_mark);
+													  send_to_db(x,y);
 											 	  }
 											 	   function onError(error) {
 												     /*   alert('code: '    + error.code    + '\n' +
