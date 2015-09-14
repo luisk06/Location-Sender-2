@@ -287,7 +287,7 @@
                         <td>&nbsp;</td>
                      </tr>
                      <tr>
-                     	<td colspan="2" valign="bottom"><div><a href="#page4" id="send_message" name="b" class="btn-class3">SEND MESSAGE TO MANAGER</a></div><td>
+                     	<td colspan="2" valign="bottom"><div><a href="#page4" id="driver_message" name="b" class="btn-class3">SEND MESSAGE TO MANAGER</a></div><td>
                      </tr>
                 </table>    
                 </div>
@@ -322,6 +322,7 @@
                          <option value="2">Flat Tire</option>
                     </select>
                 </div>
+                <div id="load_hid" hidden></div>
                 <br />
             	<!--<div><input type="button" value="SEND LOCATION" id="send_data" name="send_data" style="width:50%" /></div> -->
             	<div><a href="#" id="send_message" name="send_message" class="btn-class2">SEND MESSAGE</a></div>
@@ -331,6 +332,25 @@
 	
 	<!---------------------------------- SCRIPTS ----------------- --------->
 		<script>
+		<!-- SEND MESSAGE TO WEB -->
+		$('#send_message').click(function(){
+			
+			 $.ajax({
+                            type: 'POST',
+                            data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').html(), user_id : $('#user_name').html()},
+                            url: 'http://leanstaffing.com/testserver/sendmessage.php',
+                            success: function(data){
+                                console.log(data);
+                               // alert('Your location was successfully added');
+                            },
+                            error: function(){
+                                console.log(data);
+                                alert('There was an error adding your location');
+                            }})
+			});
+		
+		
+		
 		var loc_mark = 0;
 		//-------------- Send Location to DATABASE ------------------------
 		function send_to_db(x,y,loc_mark){ 
@@ -376,6 +396,9 @@
 										
 							//-------------- SEND REGISTER ID TO DATABASE --- ANDROID CLOUD MESSAGING --- PUSH
 								var reg = $('#reg_id').html();
+								
+								$('#load_hid').html(data[i].idts_load);
+								
 								var name = $('#user_name').val();
 								alert(reg);
 								$.ajax({
