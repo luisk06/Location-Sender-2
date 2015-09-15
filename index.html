@@ -220,15 +220,14 @@
                     <select id="user_name">
                         <option value="">Choose user...</option>
                          <option value="1">Sergio Alvarez</option>
-                         <option value="2">Jhon Smith</option>
-<!--                         <option value="3">Willmar Marin</option>
-                         <option value="4">Hernando Pe&ntilde;a</option>
-                         <option value="5">Luis Morillo</option>-->
+                         <option value="2">Willmar Marin</option>
+                      	 <option value="3">Hernando Pe&ntilde;a</option>
+                         <option value="4">Luis Morillo</option>
                     </select>
                 </div>
                 <br />
             	<!--<div><input type="button" value="SEND LOCATION" id="send_data" name="send_data" style="width:50%" /></div> -->
-            	<div><a href="#" id="send_data1" name="send_data1" class="btn-class2">SEND LOCATION</a></div>
+            	<div><a href="#" id="send_data1" name="send_data1" class="btn-class2">START</a></div>
      	</div>
      </div>
    </div>
@@ -237,8 +236,8 @@
    
    
   <div data-role="page" id="page1_1">        	
-        	<div data-role="header">
-            	<h1> <a href="#page1" id="back" class="btn-class2"> Back</a></h1>
+            <div data-role="header" style="height:1.5em">
+            	<h1 style="padding-top:4px"> <a href="#page1" id="back" class="btn-class4"> Back</a></h1><br />
             </div>
             		<div><h1>ACTIVE LOADS</h1></div>
 				<div role="listpage" class="ui-content" id="lol">
@@ -320,6 +319,8 @@
                         <option value="">Choose option...</option>
                          <option value="1">Traffic Jam</option>
                          <option value="2">Flat Tire</option>
+                         <option value="3">Damaged Vehicle</option>
+                         <option value="4">Other Problems</option>
                     </select>
                 </div>
                 <div id="load_hid" hidden></div>
@@ -334,8 +335,10 @@
 		<script>
 		<!-- SEND MESSAGE TO WEB -->
 		$('#send_message').click(function(){
-			
-			 $.ajax({
+			if ($('#troubles_').val() == ""){
+					alert ('Please Choose an Option');
+				}else{
+					$.ajax({
                             type: 'POST',
                             data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').val(), user_id : $('#user_name').val()},
                             url: 'http://lean-staffing.com/testserver/sendmessage.php',
@@ -348,6 +351,8 @@
                                 console.log(data);
                                 alert('There was an error sending your message');
                             }})
+					}
+			 
 			});
 		
 		
