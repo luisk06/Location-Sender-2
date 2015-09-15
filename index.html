@@ -295,11 +295,11 @@
     
      <div data-role="page" id="page3">
 			<div data-role="header">
-            	<h1> <a href="#page2" id="back3" class="btn-class2"> Back</a></h1>
+            	<h1> <a href="#page2" id="back3" onClick="close_sig()" class="btn-class2"> Back</a></h1>
             </div>
 			<div id="content">
 				<div id="signatureparent">
-					<div id="signature" style="width:100%; height:190px;"></div>
+					<div id="signature" style="width:100%; height:150px;"></div>
 				</div>
 			</div>
 			<div style="margin-top: 2cm;">
@@ -604,14 +604,19 @@
 <script>
 	/* SIGNATURE DETAILS
 	*/
+	function close_sig(){
+		$("#signature").html("");
+		location.href='#page2';
+		}
+	
 	(function($){
 	
-	$(document).on('pagecreate','#page3',function() {
+	$('#page3').on('pageshow',function(e,data) {
 		
 		// This is the part where jSignature is initialized.
 		var $sigdiv = $("#signature").jSignature({'UndoButton':true})
 		
-		// All the code below is just code driving the demo. 
+		/*// All the code below is just code driving the demo. 
 		, $tools = $('#tools')
 		, $extraarea = $('#displayarea')
 		, pubsubprefix = 'jSignature.demo.'
@@ -701,7 +706,7 @@
 	
 		if (Modernizr.touch){
 			$('#scrollgrabber').height($('#content').height())		
-		}
+		}*/
 		
 	})
 	
