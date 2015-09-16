@@ -320,8 +320,12 @@
                          <option value="1">Traffic Jam</option>
                          <option value="2">Flat Tire</option>
                          <option value="3">Damaged Vehicle</option>
-                         <option value="4">Other Problems</option>
+                         <option value="4">Weather Problem</option>
+                         <option value="5">Other...</option>
                     </select>
+                </div>
+                <div id="msg_hid">
+                	<textarea cols="30" rows="10" name="troubles_msg" id="troubles_msg" placeholder="message here" style="outline: none;height:80px;width:100%" ></textarea>
                 </div>
                 <div id="load_hid" hidden></div>
                 <br />
@@ -333,6 +337,23 @@
 	
 	<!---------------------------------- SCRIPTS ----------------- --------->
 		<script>
+		<!-- MESSAGE TO DASHBOARD OPTIONS -->
+		
+		$('#driver_message').click(function(){
+			$('#msg_hid').hide();
+			})
+	
+		$('#troubles_').on('change', function() {
+				  if ($('#troubles_').val() == 5 ){
+						$('#msg_hid').show();
+						//alert($("textarea#troubles_msg").val());
+					}else{
+						$('#msg_hid').hide();
+						}
+				})
+
+		
+		
 		<!-- SEND MESSAGE TO WEB -->
 		$('#send_message').click(function(){
 			if ($('#troubles_').val() == ""){
@@ -340,7 +361,7 @@
 				}else{
 					$.ajax({
                             type: 'POST',
-                            data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').val(), user_id : $('#user_name').val()},
+                            data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').val(), user_id : $('#user_name').val(), message_text: $("textarea#troubles_msg").val()},
                             url: 'http://lean-staffing.com/testserver/sendmessage.php',
                             success: function(data){
                                 console.log(data);
