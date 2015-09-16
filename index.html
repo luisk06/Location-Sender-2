@@ -360,14 +360,8 @@
 			if ($('#troubles_').val() == ""){
 					alert ('Please Choose an Option');
 				}else{
-					$.ajax({
-                            type: 'POST',
-                            data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').val(), user_id : $('#user_name').val(), message_text: $("textarea#troubles_msg").val()},
-                            url: 'http://lean-staffing.com/testserver/sendmessage.php',
-                            success: function(data){
-                                console.log(data);
-								alert('Your message Has been sent to the Manager');
-								var id_msg = $('#troubles_').val();
+					// Store message in chat history 
+						var id_msg = $('#troubles_').val();
 								alert(id_msg);
 								switch (id_msg) {
 									case 1:
@@ -386,6 +380,17 @@
 										$("#notification_message").prepend('<p>ME: '+$("textarea#troubles_msg").val()+' </p>');
 									break;
 								}
+					
+					
+					
+					$.ajax({
+                            type: 'POST',
+                            data: {load_id: $('#load_hid').html(), message_id: $('#troubles_').val(), user_id : $('#user_name').val(), message_text: $("textarea#troubles_msg").val()},
+                            url: 'http://lean-staffing.com/testserver/sendmessage.php',
+                            success: function(data){
+                                console.log(data);
+								alert('Your message Has been sent to the Manager');
+							
                                // alert('Your location was successfully added');
                             },
                             error: function(){
