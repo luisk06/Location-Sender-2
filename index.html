@@ -165,7 +165,7 @@
 							}
 						}
 							
-						$("#notification_message").append('<p>MANAGER MSG: ' + e.payload.message + '</p>');
+						$("#notification_message").prepend('<p>MANAGER MSG: ' + e.payload.message + '</p>');
                         //android only
 						//$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
                         //amazon-fireos only
@@ -312,7 +312,10 @@
   	<div class="inputstyle">
   		<div role="main" class="ui-content">
         	<p id="title_messages"><h1>Default Messages</h1></p>
-                <div>
+               
+                <div id="notification_message" style="width:100%;height: 100px;overflow-y: auto;border: 1px solid #ccc;"></div>
+                <br />
+                 <div>
                     <select id="troubles_">
                         <option value="">Choose option...</option>
                          <option value="1">Traffic Jam</option>
@@ -326,8 +329,6 @@
                 	<textarea cols="30" rows="10" name="troubles_msg" id="troubles_msg" placeholder="message here" style="outline: none;height:80px;width:100%" ></textarea>
                 </div>
                 <div id="load_hid" hidden></div>
-                <div id="notification_message" style="width:100%;height: 100px;overflow-y: auto;"></div>
-                <br />
             	<!--<div><input type="button" value="SEND LOCATION" id="send_data" name="send_data" style="width:50%" /></div> -->
             	<div><a href="#" id="send_message" name="send_message" class="btn-class2">SEND MESSAGE</a></div>
      	</div>
