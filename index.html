@@ -329,6 +329,7 @@
                 	<textarea cols="30" rows="10" name="troubles_msg" id="troubles_msg" placeholder="message here" style="outline: none;height:80px;width:100%" ></textarea>
                 </div>
                 <div id="load_hid" hidden></div>
+                <br />
             	<!--<div><input type="button" value="SEND LOCATION" id="send_data" name="send_data" style="width:50%" /></div> -->
             	<div><a href="#" id="send_message" name="send_message" class="btn-class2">SEND MESSAGE</a></div>
      	</div>
@@ -366,7 +367,9 @@
                             success: function(data){
                                 console.log(data);
 								alert('Your message Has been sent to the Manager');
-								switch ($('#troubles_').val()) {
+								var id_msg = $('#troubles_').val();
+								alert(id_msg);
+								switch (id_msg) {
 									case 1:
 										$("#notification_message").prepend('<p>ME: Traffic Jam </p>');
 									break;
