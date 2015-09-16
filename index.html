@@ -310,9 +310,9 @@
     	<h1> <a href="#page2" id="back4" class="btn-class4"> Back</a></h1>
     </div>
   	<div class="inputstyle">
-  		<div role="main" class="ui-content">
-        	<p id="title_messages"><h1>Default Messages</h1></p>
-               
+  		<div role="main" class="ui-content" style="padding-top: 0px;">
+        	<!--<p id="title_messages"><h1>Default Messages</h1></p>-->
+               <h1>Default Messages</h1>
                 <div id="notification_message" style="width:100%;height: 100px;overflow-y: auto;border: 1px solid #ccc;"></div>
                 <br />
                  <div>
@@ -488,6 +488,7 @@
         
 	<script>
            function load_details(ix){
+			   		$("#notification_message").html("")
 			   		$('#load_hid').html(ix);
 				   location.href = "#page2";
 				   //alert($('#latitude').val());
