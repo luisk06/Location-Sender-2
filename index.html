@@ -366,6 +366,23 @@
                             success: function(data){
                                 console.log(data);
 								alert('Your message Has been sent to the Manager');
+								switch ($('#troubles_').val()) {
+									case 1:
+										$("#notification_message").prepend('<p>ME: Traffic Jam </p>');
+									break;
+									case 2:
+										$("#notification_message").prepend('<p>ME: Flat Tire </p>');
+									break;
+									case 3:
+										$("#notification_message").prepend('<p>ME: Damaged Vehicle </p>');
+									break;
+									case 4:
+										$("#notification_message").prepend('<p>ME: Weather Problem </p>');
+									break;
+									case 5:
+										$("#notification_message").prepend('<p>ME: '+$("textarea#troubles_msg").val()+' </p>');
+									break;
+								}
                                // alert('Your location was successfully added');
                             },
                             error: function(){
