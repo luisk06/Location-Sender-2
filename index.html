@@ -100,8 +100,6 @@
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: <input type="text" id="latitude" name="latitude" value="'           + position.coords.latitude              + '" /><br />' +
                             'Longitude: <input type="text" id="longitude" name="longitude" value="'          + position.coords.longitude             + '" /><br />' ;
-		
-
     }
 
     // onError Callback receives a PositionError object
@@ -167,7 +165,7 @@
 							}
 						}
 							
-						//$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+						$("#notification_message").append('<p>MANAGER MSG: ' + e.payload.message + '</p><br>');
                         //android only
 						//$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
                         //amazon-fireos only
@@ -328,6 +326,7 @@
                 	<textarea cols="30" rows="10" name="troubles_msg" id="troubles_msg" placeholder="message here" style="outline: none;height:80px;width:100%" ></textarea>
                 </div>
                 <div id="load_hid" hidden></div>
+                <div id="notification_message"></div>
                 <br />
             	<!--<div><input type="button" value="SEND LOCATION" id="send_data" name="send_data" style="width:50%" /></div> -->
             	<div><a href="#" id="send_message" name="send_message" class="btn-class2">SEND MESSAGE</a></div>
