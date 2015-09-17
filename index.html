@@ -289,6 +289,7 @@
                 </table>    
                 </div>
              </div>
+             <div id="load_id_hidden" hidden></div>
     </div>
     
      <div data-role="page" id="page3">
@@ -301,8 +302,10 @@
 				</div>
 			</div>
 			<div style="margin-top: 2cm;">
-				<a href="#" id="" class="btn-class2">SAVE SIGNATURE</a>
+				<a href="#" id="save_signature" class="btn-class2">SAVE SIGNATURE</a>
 			</div>
+            <div hidden><input type="hidden" id="hidden_Signature" name="hidden_Signature" />
+            </div>
     </div>
     
     <div data-role="page" id="page4">
@@ -442,6 +445,7 @@
 								$("#lol_item").html("");
 									for(i=0;i<data.length;i++){
 											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+data[i].idts_load+')">LOAD # :'+data[i].load_number+' : '+data[i].customer_name+'</a><br />');
+											
 										}
 										
 							//-------------- SEND REGISTER ID TO DATABASE --- ANDROID CLOUD MESSAGING --- PUSH
@@ -660,6 +664,27 @@
 		
 		// This is the part where jSignature is initialized.
 		var $sigdiv = $("#signature").jSignature({'UndoButton':true})
+		/*var strval ="image/jsignature;base30,8DZ679887656310Y16b942Z1Y1358g1utl5Z3a631Y2aq1B1Fsd4012143_1O86995511Z369a77731Y99b751Z3fkf5Y5bb99952Z3751Y4854664_5S438eps1E1Bqc5000006gtrb3Z5d1E2N2E1LaY1u1N1IcZ1bm1W2N2Cp3Y61N2T3V2P1wZt2N3x1CbYk2M3K1WeZ91u1N1L1H27g1C1N1G1u8Yt2E3x2x1u6Ze1P2T3z1UoY81u1X1DcZ68Yo1D1D1ua3Zd1x1U2L2y1vc30Y8dhjonqgge7200000elof5_1T5230Z3566500Y59eb62Z4fg9520Y9ppg4Z4hnb66542Y24203100234976310138788Z2bac52Y38368a851Z8gii610266441Y5a86321220110Z36adb3Y3elge42Z368a7600441";*/
+		//Save Jsignature into var
+		
+		$('#save_signature').click(function(){
+            var sigData = $('#signature').jSignature('getData','base30');
+            $('#hidden_Signature').val(sigData);
+			alert('signature saved');
+			
+			/*var sigData = $("#signature").jSignature("setData","data:" + strval);*/
+			$.ajax({
+					type: 'POST',
+					data: {origin_sig:$('#hidden_Signature').val(),load_id:$('#load_hid').html()},
+					url: 'http://lean-staffing.com/testserver/save_sig.php',
+					success: function(data){
+						console.log(data);
+					},
+					error: function(data){
+						console.log(data);
+						alert('There was an error');
+					}})
+        	});
 		
 		/*// All the code below is just code driving the demo. 
 		, $tools = $('#tools')
