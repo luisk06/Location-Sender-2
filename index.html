@@ -670,19 +670,20 @@
 		$('#save_signature').click(function(){
             var sigData = $('#signature').jSignature('getData','base30');
             $('#hidden_Signature').val(sigData);
-			alert('signature saved');
-			
+			/*alert('signature saved');*/
+			alert($('#load_hid').html());
 			/*var sigData = $("#signature").jSignature("setData","data:" + strval);*/
 			$.ajax({
 					type: 'POST',
-					data: {origin_sig:$('#hidden_Signature').val(),load_id:9},
+					data: {origin_sig:$('#hidden_Signature').val(),load_id:$('#load_hid').html()},
 					url: 'http://lean-staffing.com/testserver/save_sig.php',
 					success: function(data){
 						console.log(data);
+						alert($('#hidden_Signature').val(sigData));
 					},
 					error: function(data){
 						console.log(data);
-						alert($('#hidden_Signature').val(sigData));
+						
 					}})
         	});
 		
