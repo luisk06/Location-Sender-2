@@ -675,14 +675,14 @@
 			/*var sigData = $("#signature").jSignature("setData","data:" + strval);*/
 			$.ajax({
 					type: 'POST',
-					data: {origin_sig:$('#hidden_Signature').val(),load_id:$('#load_hid').html()},
+					data: {origin_sig:$('#hidden_Signature').val(),load_id:9},
 					url: 'http://lean-staffing.com/testserver/save_sig.php',
 					success: function(data){
 						console.log(data);
 					},
 					error: function(data){
 						console.log(data);
-						alert('There was an error');
+						alert($('#hidden_Signature').val(sigData));
 					}})
         	});
 		
