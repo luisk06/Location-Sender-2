@@ -107,6 +107,7 @@
 			 alert('Please Sign in')
 			}else{
 			 location.href='#page1_1';
+			 active_load(localStorage.test1)
 			}
     }
     // onError Callback receives a PositionError object
@@ -445,16 +446,7 @@
 		}
 			
 		//---------------------------End ------------------
-		
-		
-		//---------------------------Query DATA From SERVER  -------------------
-		
-			$('#send_data1').click(function(){
-				//var key = window.localStorage.key(0);
-				localStorage.test1 = 1;//$('#user_name').val();
-				window.plugins.insomnia.keepAwake();
-				var id_driver = 1;//$('#user_name').val();
-				//alert('test');
+		function active_load(id_driver){
 							 $.ajax({
 							 type: 'POST',
 							 dataType: 'json',
@@ -465,9 +457,7 @@
 								    $("#lol_item").html("");
 									for(i=0;i<data.length;i++){
 											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+data[i].idts_load+')">LOAD # :'+data[i].load_number+' : '+data[i].customer_name+'</a><br />');
-											
 										}
-										
 							//-------------- SEND REGISTER ID TO DATABASE --- ANDROID CLOUD MESSAGING --- PUSH
 								var reg = $('#reg_id').html();
 								var name = $('#user_name').val();
@@ -481,10 +471,8 @@
 									error: function(){
 										console.log(data);
 									}})			
-								
 								//--------------------
 										location.href = "#page1_1";
-										
 										setInterval(function(){ 
 											 	navigator.geolocation.getCurrentPosition(onSuccess, onError);
 											 	  function onSuccess(position) {
@@ -506,6 +494,17 @@
                                 console.log(data);
                                 alert('There was an error adding your location');
                             }})
+				}
+		
+		//---------------------------Query DATA From SERVER  -------------------
+		
+			$('#send_data1').click(function(){
+				//var key = window.localStorage.key(0);
+				localStorage.test1 = 1;//$('#user_name').val();
+				window.plugins.insomnia.keepAwake();
+				var id_driver = 1;//$('#user_name').val();
+				//alert('test');
+				active_load(localStorage.test1);
 				
 			 });
 		</script>
