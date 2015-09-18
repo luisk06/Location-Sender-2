@@ -51,6 +51,8 @@
    
     function onDeviceReady() {
 		
+		alert(key_user);
+		
 	//--------- Driver's list Request -----------------	
 	/*	$.ajax({
 					 type: 'POST',
@@ -455,12 +457,6 @@
 			$('#send_data1').click(function(){
 				//var key = window.localStorage.key(0);
 				
-				window.localStorage.setItem("key", "This is 1998");
-				
-				var key_user = window.localStorage.getItem("key");
-				
-				alert(key_user);
-				
 				window.plugins.insomnia.keepAwake();
 				var id_driver = $('#user_name').val();
 				//alert('test');
@@ -550,7 +546,7 @@
 				//initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
 								$("#origin_text").html("- "+data[0].or_contact+"<br />- "+data[0].or_address_1+"<br />- "+data[0].or_city+", "+data[0].or_state+" <br/>");
 								$("#destination_text").html("- "+data[0].dt_contact+"<br /> - "+data[0].dt_address_1+"<br />- "+data[0].dt_city+", "+data[0].dt_state+" <br/>");
-								$("#header_load").html("Load # :"+data[0].load_number+": "+data[0].customer+" ");
+								$("#header_load").html("Load # :"+data[0].load_number+": "+data[0].customer_name+" ");
 								$("#item_origin").html(""+data[0].items[0].name+"");
                                 //alert('Your location was successfully added');
                             },
@@ -577,6 +573,10 @@
 					 //alert(longitude_drop);
 					 
 					initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
+					
+								window.localStorage.setItem("key", "This is 1998");
+									var key_user = window.localStorage.getItem("key");
+								
 					 
 				})
 	
