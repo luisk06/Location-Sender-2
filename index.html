@@ -538,7 +538,7 @@
 				var longitude_drop = parseFloat(data[0].dp_lng);
 				$('#hid_dp_ln').val(longitude_drop);
 				
-				initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
+				//initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
 								$("#origin_text").html("- "+data[0].or_contact+"<br />- "+data[0].or_address_1+"<br />- "+data[0].or_city+", "+data[0].or_state+" <br/>");
 								$("#destination_text").html("- "+data[0].dt_contact+"<br /> - "+data[0].dt_address_1+"<br />- "+data[0].dt_city+", "+data[0].dt_state+" <br/>");
 								$("#header_load").html("Load # :"+data[0].load_number+": "+data[0].customer+" ");
@@ -559,11 +559,13 @@
 		  
 		  	$('#page2').on('pageshow',function(e,data) {
 					 var latitude_driver = parseFloat($('#latitude').val());//37.55;
+					 alert(latitude_driver);
 					 var longitude_driver = parseFloat($('#longitude').val());//-77.44;
 					 var latitude_pickup = parseFloat($('#hid_pk_lt').val());
 					 var longitude_pickup =parseFloat($('#hid_pk_ln').val());
 					 var latitude_drop = parseFloat($('#hid_dp_lt').val());
 					 var longitude_drop = parseFloat($('#hid_dp_ln').val());
+					 alert(longitude_drop);
 					 
 					initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
 					 
