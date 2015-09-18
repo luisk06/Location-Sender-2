@@ -555,7 +555,7 @@
           
           <script>
 					function initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop) {
-					  google.maps.event.trigger(MapInstance,'resize');
+					 
 					  var bounds = new google.maps.LatLngBounds;
 					  var markersArray = [];
 					
@@ -650,6 +650,11 @@
 						}
 					  });
 					}
+					
+					 $(window).resize(function() {
+						// (the 'map' here is the result of the created 'var map = ...' above)
+						google.maps.event.trigger(map, "resize");
+					  });
 					
 					 // ------- DELETE MARKERS FOR NEW MARKERS -------- //
 					 
