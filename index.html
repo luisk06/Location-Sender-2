@@ -51,7 +51,7 @@
    
     function onDeviceReady() {
 		
-	localStorage.test1;
+
 		
 		/*if(!localStorage.test1){
 			 alert('there is noting here')
@@ -354,6 +354,19 @@
 	
 	<!---------------------------------- SCRIPTS ----------------- --------->
 		<script>
+		$('#page1').on('pageshow',function(e,data) {
+			    localStorage.test1;
+				
+				screen.lockOrientation('portrait');
+			
+					if(!localStorage.test1){
+							 alert('Please Sign in')
+							}else{
+							 location.href='#page2';
+							}
+		})
+			
+		
 		<!-- MESSAGE TO DASHBOARD OPTIONS -->
 		
 		$('#driver_message').click(function(){
@@ -443,9 +456,9 @@
 		
 			$('#send_data1').click(function(){
 				//var key = window.localStorage.key(0);
-				localStorage.test1 = $('#user_name').val();
+				localStorage.test1 = 1;//$('#user_name').val();
 				window.plugins.insomnia.keepAwake();
-				var id_driver = $('#user_name').val();
+				var id_driver = 1;//$('#user_name').val();
 				//alert('test');
 							 $.ajax({
 							 type: 'POST',
@@ -560,10 +573,6 @@
 					 //alert(longitude_drop);
 					 
 					initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
-					
-								window.localStorage.setItem("key", "This is 1998");
-									var key_user = window.localStorage.getItem("key");
-								
 					 
 				})
 	
@@ -704,13 +713,6 @@
 		}
 	
 	(function($){
-	screen.lockOrientation('portrait');
-	
-	if(!localStorage.test1){
-			 alert('Please Sign in')
-			}else{
-			 location.href='#page2';
-			}	
 	
 	
 	var cont = 0;
