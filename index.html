@@ -53,11 +53,11 @@
 		
 	localStorage.test1;
 		
-		if(!localStorage.test1){
+		/*if(!localStorage.test1){
 			 alert('there is noting here')
 			}else{
 			 alert(localStorage.test1)
-			}
+			}*/
 	//--------- Driver's list Request -----------------	
 	/*	$.ajax({
 					 type: 'POST',
@@ -443,7 +443,7 @@
 		
 			$('#send_data1').click(function(){
 				//var key = window.localStorage.key(0);
-				localStorage.test1 = "smith-cargo";
+				localStorage.test1 = $('#user_name').val();
 				window.plugins.insomnia.keepAwake();
 				var id_driver = $('#user_name').val();
 				//alert('test');
@@ -704,6 +704,15 @@
 		}
 	
 	(function($){
+	screen.lockOrientation('portrait');
+	
+	if(!localStorage.test1){
+			 alert('Please Sign in')
+			}else{
+			 location.href='#page2';
+			}	
+	
+	
 	var cont = 0;
 	$('#save_signature').click(function(){
 			cont = cont + 1;
