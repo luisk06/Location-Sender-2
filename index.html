@@ -226,6 +226,7 @@
                 <br />
             	<!--<div><input type="button" value="SEND LOCATION" id="send_data" name="send_data" style="width:50%" /></div> -->
             	<div><a href="#" id="send_data1" name="send_data1" class="btn-class2">START</a></div>
+                
      	</div>
      </div>
    </div>
@@ -452,6 +453,12 @@
 		//---------------------------Query DATA From SERVER  -------------------
 		
 			$('#send_data1').click(function(){
+				var key_user = window.localStorage.key(0);
+				
+				window.localStorage.setItem("key", $('#user_name').value());
+				
+				alert(window.localStorage.getItem("key"));
+				
 				window.plugins.insomnia.keepAwake();
 				var id_driver = $('#user_name').val();
 				//alert('test');
@@ -559,13 +566,13 @@
 		  
 		  	$('#page2').on('pageshow',function(e,data) {
 					 var latitude_driver = parseFloat($('#latitude').val());//37.55;
-					 alert(latitude_driver);
+					//alert(latitude_driver);
 					 var longitude_driver = parseFloat($('#longitude').val());//-77.44;
 					 var latitude_pickup = parseFloat($('#hid_pk_lt').val());
 					 var longitude_pickup =parseFloat($('#hid_pk_ln').val());
 					 var latitude_drop = parseFloat($('#hid_dp_lt').val());
 					 var longitude_drop = parseFloat($('#hid_dp_ln').val());
-					 alert(longitude_drop);
+					 //alert(longitude_drop);
 					 
 					initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
 					 
