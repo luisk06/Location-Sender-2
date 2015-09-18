@@ -50,9 +50,8 @@
     // device APIs are available
    
     function onDeviceReady() {
-		
-
-		
+		        localStorage.test1;
+				screen.lockOrientation('portrait');
 		/*if(!localStorage.test1){
 			 alert('there is noting here')
 			}else{
@@ -103,6 +102,12 @@
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: <input type="text" id="latitude" name="latitude" value="'           + position.coords.latitude              + '" /><br />' +
                             'Longitude: <input type="text" id="longitude" name="longitude" value="'          + position.coords.longitude             + '" /><br />' ;
+						
+		if(!localStorage.test1){
+			 alert('Please Sign in')
+			}else{
+			 location.href='#page2';
+			}
     }
     // onError Callback receives a PositionError object
     //
@@ -354,17 +359,7 @@
 	
 	<!---------------------------------- SCRIPTS ----------------- --------->
 		<script>
-		$('#page1').on('pageshow',function(e,data) {
-			    localStorage.test1;
-				
-				screen.lockOrientation('portrait');
-			
-					if(!localStorage.test1){
-							 alert('Please Sign in')
-							}else{
-							 location.href='#page2';
-							}
-		})
+		
 			
 		
 		<!-- MESSAGE TO DASHBOARD OPTIONS -->
