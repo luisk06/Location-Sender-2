@@ -453,11 +453,11 @@
 		//---------------------------Query DATA From SERVER  -------------------
 		
 			$('#send_data1').click(function(){
-				var key_user = window.localStorage.key(0);
+				//var key = window.localStorage.key(0);
 				
-				window.localStorage.setItem("key", $('#user_name').value());
+				window.localStorage.setItem("key", "This is 1998");
 				
-				alert(window.localStorage.getItem("key"));
+				var key_user = window.localStorage.getItem("key");
 				
 				window.plugins.insomnia.keepAwake();
 				var id_driver = $('#user_name').val();
