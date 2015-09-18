@@ -290,6 +290,10 @@
                 </div>
              </div>
              <div id="load_id_hidden" hidden></div>
+             <div hidden><input id="hid_pk_lt" name="hid_pk_lt" /></div>
+             <div hidden><input id="hid_pk_ln" name="hid_pk_ln" /></div>
+             <div hidden><input id="hid_dp_lt" name="hid_dp_lt" /></div>
+             <div hidden><input id="hid_dp_ln" name="hid_dp_ln" /></div>
     </div>
     
      <div data-role="page" id="page3">
@@ -524,19 +528,17 @@
 								},
                             success: function(data){
                                 console.log(data);
-				//alert(data[0].dp_long);
-				//alert(parseFloat(data[ix].dp_long));//-96.8141;//data[0].dp_long;
 				
 				var latitude_pickup = parseFloat(data[0].pk_lat);
-				//var latitude_dec_pickup = ata[0].pk_lat.toFixed(7);
+				$('#hid_pk_lt').val(latitude_pickup);
 				var longitude_pickup =parseFloat(data[0].pk_lng);
+				$('#hid_pk_ln').val(longitude_pickup);
 				var latitude_drop = parseFloat(data[0].dp_lat);
+				$('#hid_dp_lt').val(latitude_drop);
 				var longitude_drop = parseFloat(data[0].dp_lng);
-				//alert (data[0].pk_lat);
-				//alert(latitude_driver+"-"+longitude_driver+"-"+latitude_pickup+"-"+longitude_pickup+"-"+latitude_drop+"-"+longitude_drop);
+				$('#hid_dp_ln').val(longitude_drop);
+				
 				initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
-				
-				
 								$("#origin_text").html("- "+data[0].or_contact+"<br />- "+data[0].or_address_1+"<br />- "+data[0].or_city+", "+data[0].or_state+" <br/>");
 								$("#destination_text").html("- "+data[0].dt_contact+"<br /> - "+data[0].dt_address_1+"<br />- "+data[0].dt_city+", "+data[0].dt_state+" <br/>");
 								$("#header_load").html("Load # :"+data[0].load_number+": "+data[0].customer+" ");
@@ -554,6 +556,19 @@
           <!----------------------- Map, Distance , Time ------------------------------->
           
           <script>
+		  
+		  	$('#page2').on('pageshow',function(e,data) {
+					 var latitude_driver = parseFloat($('#latitude').val());//37.55;
+					 var longitude_driver = parseFloat($('#longitude').val());//-77.44;
+					 var latitude_pickup = parseFloat($('#hid_pk_lt').val());
+					 var longitude_pickup =parseFloat($('#hid_pk_ln').val());
+					 var latitude_drop = parseFloat($('#hid_dp_lt').val());
+					 var longitude_drop = parseFloat($('#hid_dp_ln').val());
+					 
+					initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop);
+					 
+				})
+	
 					function initMap1(latitude_driver, longitude_driver, latitude_pickup, longitude_pickup, latitude_drop, longitude_drop) {
 					 
 					  var bounds = new google.maps.LatLngBounds;
