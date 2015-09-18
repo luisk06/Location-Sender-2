@@ -670,15 +670,17 @@
 	/* SIGNATURE DETAILS
 	*/
 	function close_sig(){
-		var so = cordova.plugins.screenorientation;
-     	so.setOrientation(so.Orientation.PORTRAIT);
+		//var so = cordova.plugins.screenorientation;
+     	//so.setOrientation(so.Orientation.PORTRAIT);
+		screen.lockOrientation('landscape');
 		$("#signature").html("");
 		location.href='#page2';
 		}
 		
 	function close_sig2(){
-		var so = cordova.plugins.screenorientation;
-     	so.setOrientation(so.Orientation.PORTRAIT);
+		//var so = cordova.plugins.screenorientation;
+     	//so.setOrientation(so.Orientation.PORTRAIT);
+		screen.lockOrientation('landscape');
 		$("#signature2").html("");
 		location.href='#page2';
 		}
@@ -728,25 +730,27 @@
 			});
 			
 	$('#page3').on('pageshow',function(e,data) {
-		var so = cordova.plugins.screenorientation;
-     	so.setOrientation(so.Orientation.LANDSCAPE);
 		//alert(cont);
 		// This is the part where jSignature is initialized.
 		$("#signature").html("");
 		//
 		var $sigdiv = $("#signature").jSignature({'UndoButton':true});
-		//Save Jsignature into var
+		//orientation
+		//var so = cordova.plugins.screenorientation;
+     	screen.lockOrientation('landscape');
 	})
 	
 		$('#page5').on('pageshow',function(e,data) {
-		var so = cordova.plugins.screenorientation;
-     	so.setOrientation(so.Orientation.LANDSCAPE);
+		
 		//alert(cont);
 		// This is the part where jSignature is initialized.
 		$("#signature2").html("");
 		//
 		var $sigdiv = $("#signature2").jSignature({'UndoButton':true});
-		//Save Jsignature into var
+		//orientation
+		//var so = cordova.plugins.screenorientation;
+     	screen.lockOrientation('landscape');
+		
 	})
 	
 	})(jQuery)
