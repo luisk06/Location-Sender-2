@@ -218,9 +218,9 @@
                     <select id="user_name">
                         <option value="">Choose user...</option>
                          <option value="1">Sergio Alvarez</option>
-                         <option value="2">Willmar Marin</option>
+                         <!--<option value="2">Willmar Marin</option>
                       	 <option value="3">Hernando Pe&ntilde;a</option>
-                         <option value="4">Luis Morillo</option>
+                         <option value="4">Luis Morillo</option>-->
                     </select>
                 </div>
                 <br />
@@ -276,7 +276,7 @@
                         	<div><a href="#page3" id="a" name="a" class="btn-class3">GET SIGNATURE</a></div>
                         </td>
                         <td>
-                        	<div><a href="#page3" id="b" name="b" class="btn-class3">GET SIGNATURE</a></div>
+                        	<div><a href="#page5" id="b" name="b" class="btn-class3">GET SIGNATURE</a></div>
                         </td>
                      </tr>
                      <tr>
@@ -294,9 +294,9 @@
     
      <div data-role="page" id="page3">
 			<div data-role="header">
-            	<h1> <a href="#page2" id="back3" onClick="close_sig()" class="btn-class2"> Back</a></h1>
+            	<h1> <a href="" id="back3" onClick="close_sig()" class="btn-class2"> Back</a></h1>
             </div>
-			<div id="content">
+			<div id="content_s">
 				<div id="signatureparent">
 					<div id="signature"></div>
 				</div>
@@ -305,6 +305,22 @@
 				<a href="#" id="save_signature" class="btn-class2">SAVE SIGNATURE</a>
 			</div>
             <div hidden><input type="hidden" id="hidden_Signature" name="hidden_Signature" />
+            </div>
+    </div>
+    
+    <div data-role="page" id="page5">
+			<div data-role="header">
+            	<h1> <a href="" id="back4" onClick="close_sig2()" class="btn-class2"> Back</a></h1>
+            </div>
+			<div id="content_s2">
+				<div id="signatureparent2">
+					<div id="signature2"></div>
+				</div>
+			</div>
+			<div style="margin-top: 2cm;">
+				<a href="#" id="save_signature2" class="btn-class2">SAVE SIGNATURE</a>
+			</div>
+            <div hidden><input type="hidden" id="hidden_Signature2" name="hidden_Signature2" />
             </div>
     </div>
     
@@ -657,21 +673,20 @@
 		$("#signature").html("");
 		location.href='#page2';
 		}
+		
+	function close_sig2(){
+		$("#signature2").html("");
+		location.href='#page2';
+		}
 	
 	(function($){
-	
-	$('#page3').on('pageshow',function(e,data) {
-		
-		// This is the part where jSignature is initialized.
-		var $sigdiv = $("#signature").jSignature({'UndoButton':true})
-		/*var strval ="image/jsignature;base30,8DZ679887656310Y16b942Z1Y1358g1utl5Z3a631Y2aq1B1Fsd4012143_1O86995511Z369a77731Y99b751Z3fkf5Y5bb99952Z3751Y4854664_5S438eps1E1Bqc5000006gtrb3Z5d1E2N2E1LaY1u1N1IcZ1bm1W2N2Cp3Y61N2T3V2P1wZt2N3x1CbYk2M3K1WeZ91u1N1L1H27g1C1N1G1u8Yt2E3x2x1u6Ze1P2T3z1UoY81u1X1DcZ68Yo1D1D1ua3Zd1x1U2L2y1vc30Y8dhjonqgge7200000elof5_1T5230Z3566500Y59eb62Z4fg9520Y9ppg4Z4hnb66542Y24203100234976310138788Z2bac52Y38368a851Z8gii610266441Y5a86321220110Z36adb3Y3elge42Z368a7600441";*/
-		//Save Jsignature into var
-		
-		$('#save_signature').click(function(){
+	var cont = 0;
+	$('#save_signature').click(function(){
+			cont = cont + 1;
             var sigData = $('#signature').jSignature('getData','base30');
             $('#hidden_Signature').val(sigData);
 			/*alert('signature saved');*/
-			alert($('#load_hid').html());
+			//alert($('#load_hid').html());
 			/*var sigData = $("#signature").jSignature("setData","data:" + strval);*/
 			$.ajax({
 					type: 'POST',
@@ -679,106 +694,53 @@
 					url: 'http://lean-staffing.com/testserver/save_sig.php',
 					success: function(data){
 						console.log(data);
-						alert($('#hidden_Signature').val(sigData));
+						alert('Pick up signature saved');
+						$sigdiv.jSignature("reset");
 					},
 					error: function(data){
 						console.log(data);
-						
 					}})
-        	});
-		
-		/*// All the code below is just code driving the demo. 
-		, $tools = $('#tools')
-		, $extraarea = $('#displayarea')
-		, pubsubprefix = 'jSignature.demo.'
-		
-		var export_plugins = $sigdiv.jSignature('listPlugins','export')
-		, chops = ['<span><b>Extract signature data as: </b></span><select>','<option value="">(select export format)</option>']
-		, name
-		for(var i in export_plugins){
-			if (export_plugins.hasOwnProperty(i)){
-				name = export_plugins[i]
-				chops.push('<option value="' + name + '">' + name + '</option>')
-			}
-		}
-		chops.push('</select><span><b> or: </b></span>')
-		
-		$(chops.join('')).bind('change', function(e){
-			if (e.target.value !== ''){
-				var data = $sigdiv.jSignature('getData', e.target.value)
-				$.publish(pubsubprefix + 'formatchanged')
-				if (typeof data === 'string'){
-					$('textarea', $tools).val(data)
-				} else if($.isArray(data) && data.length === 2){
-					$('textarea', $tools).val(data.join(','))
-					$.publish(pubsubprefix + data[0], data);
-				} else {
-					try {
-						$('textarea', $tools).val(JSON.stringify(data))
-					} catch (ex) {
-						$('textarea', $tools).val('Not sure how to stringify this, likely binary, format.')
-					}
-				}
-			}
-		}).appendTo($tools)
+			});
 	
-		
-		$('<input type="button" value="Reset">').bind('click', function(e){
-			$sigdiv.jSignature('reset')
-		}).appendTo($tools)
-		
-		$('<div><textarea style="width:100%;height:7em;"></textarea></div>').appendTo($tools)
-		
-		$.subscribe(pubsubprefix + 'formatchanged', function(){
-			$extraarea.html('')
-		})
-	
-		$.subscribe(pubsubprefix + 'image/svg+xml', function(data) {
-	
-			try{
-				var i = new Image()
-				i.src = 'data:' + data[0] + ';base64,' + btoa( data[1] )
-				$(i).appendTo($extraarea)
-			} catch (ex) {
-	
-			}
+	$('#save_signature2').click(function(){
+			cont = cont + 1;
+            var sigData = $('#signature2').jSignature('getData','base30');
+            $('#hidden_Signature2').val(sigData);
+			/*alert('signature saved');*/
+			//alert($('#load_hid').html());
+			/*var sigData = $("#signature").jSignature("setData","data:" + strval);*/
+			$.ajax({
+					type: 'POST',
+					data: {destination_sig:$('#hidden_Signature2').val(),load_id:$('#load_hid').html()},
+					url: 'http://lean-staffing.com/testserver/save_sig2.php',
+					success: function(data){
+						console.log(data);
+						alert('Delivery signature saved');
+						$sigdiv.jSignature("reset");
+					},
+					error: function(data){
+						console.log(data);
+					}})
+			});
 			
-			var message = [
-				"If you don't see an image immediately above, it means your browser is unable to display in-line (data-url-formatted) SVG."
-				, "This is NOT an issue with jSignature, as we can export proper SVG document regardless of browser's ability to display it."
-				, "Try this page in a modern browser to see the SVG on the page, or export data as plain SVG, save to disk as text file and view in any SVG-capabale viewer."
-			   ]
-			$( "<div>" + message.join("<br/>") + "</div>" ).appendTo( $extraarea )
-		});
+	$('#page3').on('pageshow',function(e,data) {
+		//alert(cont);
+		// This is the part where jSignature is initialized.
+		$("#signature").html("");
+		//
+		var $sigdiv = $("#signature").jSignature({'UndoButton':true});
+		//Save Jsignature into var
+
+		
+	})
 	
-		$.subscribe(pubsubprefix + 'image/svg+xml;base64', function(data) {
-			var i = new Image()
-			i.src = 'data:' + data[0] + ',' + data[1]
-			$(i).appendTo($extraarea)
-			
-			var message = [
-				"If you don't see an image immediately above, it means your browser is unable to display in-line (data-url-formatted) SVG."
-				, "This is NOT an issue with jSignature, as we can export proper SVG document regardless of browser's ability to display it."
-				, "Try this page in a modern browser to see the SVG on the page, or export data as plain SVG, save to disk as text file and view in any SVG-capabale viewer."
-			   ]
-			$( "<div>" + message.join("<br/>") + "</div>" ).appendTo( $extraarea )
-		});
-		
-		$.subscribe(pubsubprefix + 'image/png;base64', function(data) {
-			var i = new Image()
-			i.src = 'data:' + data[0] + ',' + data[1]
-			$('<span><b>As you can see, one of the problems of "image" extraction (besides not working on some old Androids, elsewhere) is that it extracts A LOT OF DATA and includes all the decoration that is not part of the signature.</b></span>').appendTo($extraarea)
-			$(i).appendTo($extraarea)
-		});
-		
-		$.subscribe(pubsubprefix + 'image/jsignature;base30', function(data) {
-			$('<span><b>This is a vector format not natively render-able by browsers. Format is a compressed "movement coordinates arrays" structure tuned for use server-side. The bonus of this format is its tiny storage footprint and ease of deriving rendering instructions in programmatic, iterative manner.</b></span>').appendTo($extraarea)
-		});
-	
-		if (Modernizr.touch){
-			$('#scrollgrabber').height($('#content').height())		
-		}*/
-		
+		$('#page5').on('pageshow',function(e,data) {
+		//alert(cont);
+		// This is the part where jSignature is initialized.
+		$("#signature2").html("");
+		//
+		var $sigdiv = $("#signature2").jSignature({'UndoButton':true});
+		//Save Jsignature into var
 	})
 	
 	})(jQuery)
