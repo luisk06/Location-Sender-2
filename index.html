@@ -39,8 +39,8 @@
 	</style>
 	<script src="js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-      <script src="js/jquery.mobile-1.4.5.min.js"></script> 
-      <script type="text/javascript" src="PushNotification.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script> 
+    <script type="text/javascript" src="PushNotification.js"></script>
     <script type="text/javascript" charset="utf-8">
     // Wait for device API libraries to load
     //
@@ -51,7 +51,8 @@
    
     function onDeviceReady() {
 		
-		alert(key_user);
+		localStorage.test1 = "smithcargo";
+		alert(localStorage.test1);
 		
 	//--------- Driver's list Request -----------------	
 	/*	$.ajax({
@@ -74,7 +75,6 @@
 	
 	
 		 navigator.geolocation.getCurrentPosition(onSuccess, onError);
-		 
 		 //Push Notification
 		 try 
 				{ 
@@ -92,37 +92,26 @@
 					txt+="Error Description: " + err.message + "\n\n"; 
 					alert(txt); 
 				} 
-      
     }
-
     // onSuccess Geolocation
     //
     function onSuccess(position) {
-  	
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: <input type="text" id="latitude" name="latitude" value="'           + position.coords.latitude              + '" /><br />' +
                             'Longitude: <input type="text" id="longitude" name="longitude" value="'          + position.coords.longitude             + '" /><br />' ;
     }
-
     // onError Callback receives a PositionError object
     //
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
-	
 //------------------------------- handle GCM notifications for Android -------------------------------------------
 //------------------------------------------------------------------------
 //------------------------------------------------------------------------
-   	////////
-				////////
-				////////
-				////////
-				////////
 				////////////////
 				////////
 				////////
-				
 				 // handle GCM notifications for Android
             function onNotification(e) {
                 $("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
@@ -298,7 +287,6 @@
              <div hidden><input id="hid_dp_lt" name="hid_dp_lt" /></div>
              <div hidden><input id="hid_dp_ln" name="hid_dp_ln" /></div>
     </div>
-    
      <div data-role="page" id="page3">
 			<div data-role="header">
             	<h1> <a href="" id="back3" onClick="close_sig()" class="btn-class2"> Back</a></h1>
@@ -314,7 +302,6 @@
             <div hidden><input type="hidden" id="hidden_Signature" name="hidden_Signature" />
             </div>
     </div>
-    
     <div data-role="page" id="page5">
 			<div data-role="header">
             	<h1> <a href="" id="back4" onClick="close_sig2()" class="btn-class2"> Back</a></h1>
@@ -330,11 +317,10 @@
             <div hidden><input type="hidden" id="hidden_Signature2" name="hidden_Signature2" />
             </div>
     </div>
-    
     <div data-role="page" id="page4">
-  	<div data-role="header">
-    	<h1> <a href="#page2" id="back4" class="btn-class4"> Back</a></h1>
-    </div>
+        <div data-role="header">
+            <h1> <a href="#page2" id="back4" class="btn-class4"> Back</a></h1>
+        </div>
   	<div class="inputstyle">
   		<div role="main" class="ui-content" style="padding-top: 0px;">
         	<!--<p id="title_messages"><h1>Default Messages</h1></p>-->
@@ -424,9 +410,6 @@
 					}
 			 
 			});
-		
-		
-		
 		//var loc_mark = 0;
 		//-------------- Send Location to DATABASE ------------------------
 		//function send_to_db(x,y,loc_mark){ 
@@ -467,7 +450,7 @@
 							
 	                            success: function(data){
 	                                console.log(data);
-								$("#lol_item").html("");
+								    $("#lol_item").html("");
 									for(i=0;i<data.length;i++){
 											$("#lol_item").append('<a href="#" style="color: red;" class="" onclick="load_details('+data[i].idts_load+')">LOAD # :'+data[i].load_number+' : '+data[i].customer_name+'</a><br />');
 											
