@@ -138,7 +138,8 @@
                     case 'registered':
 					if ( e.regid.length > 0 )
 					{
-						alert(e.regid);
+						//alert to know if tge device got the Cloud ID
+						//alert(e.regid);
 						$("#app-status-ul").append('<li>REGISTERING -> REGID: \n\n' + '<div id="reg_id">' + e.regid +'</div>'+ "\n\n</li>");
 						$("#reg_id").html(e.regid);
 						
@@ -413,7 +414,7 @@
 								alert('Your message Has been sent to the Manager');
 								
 								var id_msg = $('#troubles_').val();
-								alert(parseInt(id_msg));
+								// alert(parseInt(id_msg));
 								switch (parseInt(id_msg)) {
 									case 1:
 										$("#notification_message").prepend('<p>ME: Traffic Jam </p>');
