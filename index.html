@@ -46,12 +46,12 @@
     //
 	var pushNotification;
     document.addEventListener("deviceready", onDeviceReady, false);
-
     // device APIs are available
    
     function onDeviceReady() {
 		        localStorage.test1;
 				screen.lockOrientation('portrait');
+				
 		/*if(!localStorage.test1){
 			 alert('there is noting here')
 			}else{
@@ -99,11 +99,18 @@
     // onSuccess Geolocation
     //
     function onSuccess(position) {
+	cordova.plugins.backgroundMode.enable();
+	
+	/*cordova.plugins.backgroundMode.onactivate = function () {
+	alert('background mode activated')
+	}*/
+	
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: <input type="text" id="latitude" name="latitude" value="'           + position.coords.latitude              + '" /><br />' +
                             'Longitude: <input type="text" id="longitude" name="longitude" value="'          + position.coords.longitude             + '" /><br />' ;
 						
 		if(!localStorage.test1){
+			location.href='#page1';
 			 alert('Please Sign in')
 			}else{
 			 location.href='#page1_1';
@@ -154,7 +161,6 @@
 					                // if the notification contains a soundname, play it.
 					                // playing a sound also requires the org.apache.cordova.media plugin
 					                var my_media = new Media("/android_asset/www/"+ soundfile);
-
 							my_media.play();
 						}
 						else
@@ -206,6 +212,18 @@
  
   </head>
   <body>
+   <div data-role="page" id="page0">        	
+            <div data-role="header" style="height:1.5em">
+            	<!--<h1 style="padding-top:4px"> <a href="#page1" id="back" class="btn-class4"> Back</a></h1><br />-->
+            </div>
+            		<div><h1>Setting Up Phone...</h1></div>
+				<div role="loadingpage" class="ui-content">
+                <img src="css/loading.gif" style="width:20%;margin-left:40%;" />
+				 </div>
+             <!-- register id for push notifications -->
+               <div></div>
+    </div>
+    
   <div data-role="page" id="page1">
   	<div data-role="header">
     	<div><img width="100%" src="css/logo.png" style="padding-top:15px; padding-left:15px"/></div>
@@ -502,7 +520,7 @@
 				//var key = window.localStorage.key(0);
 				localStorage.test1 = 1;//$('#user_name').val();
 				window.plugins.insomnia.keepAwake();
-				var id_driver = 1;//$('#user_name').val();
+				var id_driver = $('#user_name').val();
 				//alert('test');
 				active_load(localStorage.test1);
 				
@@ -640,7 +658,6 @@
 							};
 						  };
 					
-
 						  for (var i = 0; i < 1; i++) {
 							var results = response.rows[i].elements;
 							  geocoder.geocode({'address': originList[i]},
@@ -682,7 +699,6 @@
 					}
 					
 					// ------- END OF DELETE MARKERS
-
     	</script>
     <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap1" async defer></script>
 <!-----------------------END OF   Map, Distance , Time ------------------------------->
@@ -746,6 +762,7 @@
 					success: function(data){
 						console.log(data);
 						alert('Delivery signature saved');
+						cordova.plugins.backgroundMode.disable();
 						$sigdiv.jSignature("reset");
 					},
 					error: function(data){
@@ -782,7 +799,6 @@
 </script>
 		  
     <script>
-
 /*		setTimeout(function(){
 	   			window.location.reload(1);
 			}, 100000);*/
