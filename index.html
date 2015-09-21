@@ -747,6 +747,7 @@
 					success: function(data){
 						console.log(data);
 						alert('Delivery signature saved');
+						cordova.plugins.backgroundMode.disable();
 						$sigdiv.jSignature("reset");
 					},
 					error: function(data){
