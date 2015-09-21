@@ -101,6 +101,10 @@
     //
     function onSuccess(position) {
 	cordova.plugins.backgroundMode.enable();
+	
+	cordova.plugins.backgroundMode.onactivate = function () {
+	alert('background mode activated')
+	}
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: <input type="text" id="latitude" name="latitude" value="'           + position.coords.latitude              + '" /><br />' +
                             'Longitude: <input type="text" id="longitude" name="longitude" value="'          + position.coords.longitude             + '" /><br />' ;
