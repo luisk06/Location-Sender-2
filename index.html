@@ -99,6 +99,13 @@
     // onSuccess Geolocation
     //
     function onSuccess(position) {
+		
+	cordova.plugins.backgroundMode.setDefaults({
+			title:  "Smith Track'n Go",
+			ticker: 'test',
+			text:   'The app is working'
+		});
+		
 	cordova.plugins.backgroundMode.enable();
 	
 	/*cordova.plugins.backgroundMode.onactivate = function () {
@@ -521,7 +528,7 @@
 				//var key = window.localStorage.key(0);
 				localStorage.test1 = 1;//$('#user_name').val();
 				window.plugins.insomnia.keepAwake();
-				var id_driver = $('#user_name').val();
+				//var id_driver = $('#user_name').val();
 				//alert('test');
 				active_load(localStorage.test1);
 				
